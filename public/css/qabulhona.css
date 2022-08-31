@@ -1,0 +1,52 @@
+/* Navbar */
+
+#brand-img {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+}
+
+.ab{
+  margin: 0 1.5rem 0;
+  line-height: 2;
+}
+
+.title{
+  padding: 0;
+  background-color: #5BB318;
+  color: white;
+}
+
+.navbar-nav {
+ margin-left: auto;
+}
+.navbar-div{
+  padding: 1% 6% 2% 8%;
+}
+
+
+/* footer */
+#footer{
+  text-align: center;
+  padding: 3% 0 1%;
+  background-color: #5BB318;
+  margin-top: 5%;
+}
+.socials{
+  color: black;
+  margin: 10px;
+}
+.soc{
+  margin: 10px;
+}
+
+
+
+
+.container {
+  max-width: 960px;
+}
+
+.my-img {
+  border-radius: 50%;
+}

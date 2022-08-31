@@ -1,0 +1,54 @@
+<%- include("partials/header"); -%>
+
+
+
+
+<div class="table-reponsive">
+  <table class="table">
+    <thead>
+      <tr class="myTableHead">
+        <th>#</th>
+        <th class="col">Ism Familiyasi</th>
+        <th class="col">Tugulgan Yili</th>
+        <th class="col">Telefon Raqami</th>
+        <th class="col">Call Center</th>
+        <th class="col">Viloyati</th>
+        <th class="col">Tumani</th>
+        <th class="col">To'lov Summasi</th>
+        <th class="col">Kelgan Sanasi</th>
+      </tr>
+    </thead>
+    <div class="table-content">
+      <tbody>
+        <%  let num=0;   %>
+        <% kasallarr.forEach(kasal =>{ %>
+        <%  num++;  %>
+
+        <tr>
+          <td><%= num %></td>
+          <td> <%= kasal.ismFamiliyasi  %> </td>
+          <td> <%= kasal.tugulganYili %> </td>
+          <td> <%= kasal.telRaqami %> </td>
+          <td> <%= kasal.callCenter %> </td>
+          <td> <%= kasal.viloyati %> </td>
+          <td> <%= kasal.tumani %> </td>
+          <td> <%= kasal.tolovSummasi %> </td>
+          <td> <%= kasal.kelganSana %> </td>
+
+
+        </tr>
+        <% }); %>
+
+      </tbody>
+    </div>
+
+  </table>
+  <div class="tableFoot">
+    <label for="kasalSoni"><h2>Bugungi kasallar soni Jami: </h2></label>
+    <label id="kasalSoni"><h2><%= num %></h2></label>
+  </div>
+</div>
+
+
+
+<%- include("partials/footer"); -%>

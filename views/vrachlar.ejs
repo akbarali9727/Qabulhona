@@ -1,0 +1,71 @@
+<%- include("partials/header"); -%>
+
+<div class="container">
+  <div class="row g-5 vrachlarWindow">
+
+<div class="col-md-5 col-lg-4 order-md-last">
+  <h4 class="d-flex justify-content-between align-items-center mb-3">
+    <span class="text-success">Bemorlar</span>
+    <span class="badge bg-success rounded-pill"> <%= kasalData.length %> </span>
+  </h4>
+  <ul class="list-group mb-3">
+        <%  let num=0;   %>
+        <%  kasalData.forEach(kasal=>{ %>
+    <li type="submit" class="list-group-item d-flex justify-content-between bg-light" value= <%=num%> >
+        <div class="text">
+        <h3 class="my-0"> <%= kasal.ismFamiliyasi %></h3>
+      </div>
+    </li>
+      <%  num++;  %>
+            <%  })  %>
+  </ul>
+</div>
+
+
+<div class="col-md-7 col-lg-8">
+  <h2 class="mb-3">Bemor malumotlari</h2>
+
+  <form action="/vrachlar" method="post">
+
+    <div class="row">
+      <div class="col">
+        <label for="ismSharifi"><h5>Ism Sharifi:</h5></label>
+        <label id="ismSharifi" class="yozuv"> <%= kasalData[0].ismFamiliyasi %></label>
+      </div>
+      <div class="col">
+        <label for="tugulganYili"><h5>Tug'ulgan Yili: </h5></label>
+        <label id="tugulganYili" class="yozuv"> <%= kasalData[0].tugulganYili %></label>
+      </div>
+        </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="adresi"><h5>Qayerdan Keldi:</h5></label>
+          <label id="adresi" class="yozuv"><%= kasalData[0].viloyati+", "+kasalData[0].tumani %></label>
+        </div>
+        <div class="col">
+          <label for="summa"><h5>To`lov Summasi:</h5></label>
+          <label id="summa" class="yozuv"><%= kasalData[0].tolovSummasi %></label>
+        </div>
+      </div>
+      <label for="izoh"><h5>Diagnoz va izohlar:</h5></label>
+      <div>
+        <textarea id="izoh" name="bemorIzohi" rows="10" cols="90"></textarea>
+      </div>
+
+      
+
+      <button type="" name="malumotniSaqlash" class="btn btn-success" value=<%= kasalData[0].id %>  >Saqlash</button>
+
+</form>
+  </div>
+  </div>
+
+
+
+
+</div>
+
+
+
+<%- include("partials/footer"); -%>

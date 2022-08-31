@@ -1,0 +1,84 @@
+ody{
+  font-family: 'Ubuntu';
+  text-align: center;
+}
+
+h1, h2, h3, h4{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+}
+
+
+/* Navbar */
+
+#brand-img {
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+}
+
+.ab{
+  margin: 0 1.5rem 0;
+  line-height: 2;
+}
+
+.title{
+  padding: 0;
+  background-color: #5BB318;
+  color: white;
+}
+
+.navbar-nav {
+ margin-left: auto;
+}
+.navbar-div{
+  padding: 1% 6% 2% 8%;
+}
+
+
+
+      /* Table style */
+.table-content{
+  max-height: 600px;
+  overflow:auto;
+}
+.myTableHead{
+  background-color: #2B7A0B;
+  margin-bottom: auto;
+  position: sticky;
+  top: 0;
+}
+.tableFoot{
+  background-color: #2B7A0B;
+  position: sticky;
+  bottom: 0;
+}
+
+
+
+/* vrachlar bolimi */
+.yozuv{
+  font-size: 1.3rem;
+  line-height: 2.5;
+  color: #2B7A0B;
+}
+.vrachlarWindow{
+  margin: 2% auto 7%;
+}
+
+
+
+/* footer */
+#footer{
+  text-align: center;
+  padding: 3% 0 1%;
+  background-color: #5BB318;
+  margin-top: 0;
+}
+.socials{
+  color: black;
+  margin: 10px;
+}
+.soc{
+  margin: 10px;
+}
