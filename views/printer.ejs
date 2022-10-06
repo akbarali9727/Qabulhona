@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<link rel="stylesheet" href="css/printer.css">
+  </head>
+  <body>
+    <div class="ticket">
+      <img class="myImg" src="images/doctorAli.jpg" alt="">
+      <p> <%= ismFamiliyasi %> </p>
+      <h6>Sizning navbat raqamingiz:</h4>
+    <h1><%= navbatRaqami %></h1>
+    <p>Shifokor: <%= shifokori %></p>
+    <p>Hona raqami: <%= honaRaqami %></p>
+    <div class="row">
+      <a href="/qabulhona" class="btn btn-outline-success hidden-print col" type="submit" name="button">Ortga</a>
+      <button class="print btn btn-outline-warning hidden-print col" type="button" name="btn">Print</button>
+    </div>
+    </div>
+  </body>
+    <script type="text/javascript" src="javascript/printer.js"></script>
+</html>

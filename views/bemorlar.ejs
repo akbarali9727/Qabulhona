@@ -1,5 +1,11 @@
 <%- include("partials/header"); -%>
 
+<div class="bemorlarButton">
+  <form action="/vaqti" method="post">
+  <button class="bemor-btn btn btn-outline-warning btn-lg" type="submit" name="vaqti" value="<%= vaqti %>" > <%= vaqti %> </button>
+  </form>
+</div>
+
 
 
 
@@ -16,28 +22,35 @@
         <th class="col">Tumani</th>
         <th class="col">To'lov Summasi</th>
         <th class="col">Kelgan Sanasi</th>
+        <th class="col">Amallar</th>
       </tr>
     </thead>
     <div class="table-content">
       <tbody>
-        <%  let num=0;   %>
-        <% kasallarr.forEach(kasal =>{ %>
-        <%  num++;  %>
+        <%  for(var i=0; i<kasallar.length; i++){  %>
 
-        <tr>
-          <td><%= num %></td>
-          <td> <%= kasal.ismFamiliyasi  %> </td>
-          <td> <%= kasal.tugulganYili %> </td>
-          <td> <%= kasal.telRaqami %> </td>
-          <td> <%= kasal.callCenter %> </td>
-          <td> <%= kasal.viloyati %> </td>
-          <td> <%= kasal.tumani %> </td>
-          <td> <%= kasal.tolovSummasi %> </td>
-          <td> <%= kasal.kelganSana %> </td>
+          <tr>
+            <td><%= i+1 %></td>
+            <td contenteditable="true"> <%= kasallar[i].ismFamiliyasi  %> </td>
+            <td> <%= kasallar[i].tugulganYili %> </td>
+            <td> <%= kasallar[i].telRaqami %> </td>
+            <td> <%= kasallar[i].callCenter %> </td>
+            <td> <%= kasallar[i].viloyati %> </td>
+            <td> <%= kasallar[i].tumani %> </td>
+            <td> <%= kasallar[i].tolovSummasi %> </td>
+            <td> <%= kasallar[i].kelganSana %> </td>
+            <td>
+              <form action="/bemorlar" method="post">
+                <div class="row">
+                  <input type="hidden" name="myId" value="<%= kasallar[i]._id %>">
+                  <button class="deleteImg col" type="submit" name="myButton" value="delete"><img src="images/trash-can.png" alt="delete icon"></button>
+                  <button class="deleteImg col" type="submit" name="myButton" value="change"><img src="images/pen.png" alt="change icon"></button>
+                </div>
+              </form>
 
-
-        </tr>
-        <% }); %>
+            </td>
+          </tr>
+      <%  }  %>
 
       </tbody>
     </div>
@@ -45,7 +58,7 @@
   </table>
   <div class="tableFoot">
     <label for="kasalSoni"><h2>Bugungi kasallar soni Jami: </h2></label>
-    <label id="kasalSoni"><h2><%= num %></h2></label>
+    <label id="kasalSoni"><h2><%= kasallar.length %></h2></label>
   </div>
 </div>
 

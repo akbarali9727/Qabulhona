@@ -49,12 +49,19 @@ function addingTuman(id, list){
 
           // Call-Center qoshish
 var options=[];
-var dilm=new callCen("Dilmurodjon","dilmurodjon");
-options.push(dilm);
-var akb=new callCen("Akbarali","akbarali");
-options.push(akb);
-var yangi=new callCen("yangiCAll","yangiCall");
-options.push(yangi);
+var siroch=new callCen("Sirochiddin","Sirochiddin");
+options.push(siroch);
+var sobirovIslom=new callCen("Sobiror Islom","Sobirov Islom");
+options.push(sobirovIslom);
+var bahtiyorjon=new callCen("Bahtiyorjon","Bahtiyorjon");
+options.push(bahtiyorjon);
+var ravshanbek=new callCen("Ravshanbek","Ravshanbek");
+options.push(ravshanbek);
+var davronbek=new callCen("Davronbek","Davronbek");
+options.push(davronbek);
+var muhammadjonOktamov=new callCen("Muhammadjon Oktamov","Muhammadjon Oktamov");
+options.push(muhammadjonOktamov);
+
 addingList("callCenter",options);
 
 

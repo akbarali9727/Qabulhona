@@ -49,8 +49,12 @@
       <div>
         <textarea id="izoh" name="bemorIzohi" rows="10" cols="90"></textarea>
       </div>
+      <form action="/vrachYakunlash" method="post">
+        <button type="submit" class="btn btn-danger" name="button" value="<%= docName %>">Yakunlash</button>
 
-      <button onclick="window.location.reload();" class="btn btn-success">Yangilash</button>
+        <button type="button" onclick="window.location.reload();" class="btn btn-success">Reload</button>
+      </form>
+
 
   </div>
   </div>

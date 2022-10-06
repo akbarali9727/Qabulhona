@@ -25,7 +25,7 @@
 <div class="col-md-7 col-lg-8">
   <h2 class="mb-3">Bemor malumotlari</h2>
 
-  <form action="/vrachlar" method="post">
+  <form action="/shifokorlar" method="post">
 
     <div class="row">
       <div class="col">
@@ -50,10 +50,10 @@
       </div>
       <label for="izoh"><h5>Diagnoz va izohlar:</h5></label>
       <div>
-        <textarea id="izoh" name="bemorIzohi" rows="10" cols="90"></textarea>
+        <textarea id="izoh" name="bemorIzohi" rows="10" cols="90"><%= kasalData[0].diagnozi %></textarea>
       </div>
 
-      
+
 
       <button type="" name="malumotniSaqlash" class="btn btn-success" value=<%= kasalData[0].id %>  >Saqlash</button>
 

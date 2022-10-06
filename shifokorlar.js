@@ -1,50 +1,53 @@
-function Shifokor(ismSharifi,ishgaKelgan,kelganSana,koriklarSoni){
-this.ismSharifi = ismSharifi;
-this.ishgaKelgan = ishgaKelgan;
-this.kelganSana = kelganSana;
-this.koriklarSoni = koriklarSoni;
-}
-const shifokorlar=[];
-let foydalanishSoni=0;
+const mongoose = require("mongoose");
+const cron=require('node-cron');
+
+mongoose.connect("mongodb+srv://admin-akbarali:Test123@atlascluster.7nja8qs.mongodb.net/kasallarDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+const doctorSchema = new mongoose.Schema({
+  _id: Number,
+  ismi: String,
+  ishgaKelgan: Boolean,
+  koriklarSoni: Number,
+  honaRaqami: Number
+});
 
 
+const Doctor=mongoose.model("Doctor",doctorSchema);
+  let today = new Date().toISOString().split('T')[0];
 
-let date=new Date();
-const zokirjon=new Shifokor("Zokirjon",false,date,0);
-shifokorlar.push(zokirjon);
-const maMing=new Shifokor("Ma Ming",false,date,0);
-shifokorlar.push(maMing);
-const akbarali=new Shifokor("Akbarali",false,date,0);
-shifokorlar.push(akbarali);
-const ahrorjon=new Shifokor("Ahrorjon",false,date,0);
-shifokorlar.push(ahrorjon);
-const dilmurodjon=new Shifokor("Dilmurodjon",false,date,0);
-shifokorlar.push(dilmurodjon);
-const hojimurod=new Shifokor("Hojimurod",false,date,0);
-shifokorlar.push(hojimurod);
+
+cron.schedule('0 0 * * *',()=>{
+  Doctor.updateMany({},{koriklarSoni: 0,ishgaKelgan: false },function(err,callback){
+    if(!err){
+    }
+  });
+});
+
+
 
 exports.getShifokorlar = function(){
-  let today=new Date();
-  shifokorlar.forEach(shifokor=>{
-    if(shifokor.kelganSana.toDateString()!==today.toDateString()){
-      shifokor.kelganSana=today;
-      shifokor.koriklarSoni=0;
-      shifokor.ishgaKelgan=false;
-    }
-  })
-  return shifokorlar;
-}
+return Doctor;
+};
 
 exports.shifokorKorigigaQoshish = function(shifokorName){
-  shifokorlar.forEach(shifokor=>{
-    if(shifokor.ismSharifi.toLowerCase()===shifokorName.toLowerCase()){
-      shifokor.koriklarSoni++;
-      return;
-    }
-  })
+Doctor.findOneAndUpdate({ismi: shifokorName},{$inc:{koriklarSoni: +1}},function(err,callback){
+});
+}
+
+exports.shifokorKetdi = function(shifokorName){
+Doctor.findOneAndUpdate({ismi:shifokorName},{ishgaKelgan: false},function(err,callback){
+if(!err){
+}
+});
 }
 
 
 exports.shifokorKeldi = function(shifokorNum){
-shifokorlar[shifokorNum].ishgaKelgan=true;
+Doctor.findOneAndUpdate({_id:shifokorNum},{ishgaKelgan: true},function(err,callback){
+if(!err){
+}
+});
 }

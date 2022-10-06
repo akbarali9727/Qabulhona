@@ -25,13 +25,13 @@
             <a class="nav-link active ab" aria-current="page" href="/">Home</a>
             <a class="nav-link ab" href="/qabulhona">Reception</a>
             <a class="nav-link ab" href="/">Shifokorlar</a>
-            <a class="nav-link ab" href="/">Mahsulotlar</a>
+            <a class="nav-link ab" href="/">Bemorlar</a>
           </div>
 
-          <form class="d-flex" role="search">
+          <!-- <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Izlash" aria-label="Search">
       <button class="btn btn-outline-light" type="submit">Izlash</button>
-    </form>
+    </form> -->
         </div>
       </nav>
   </section>
@@ -57,13 +57,13 @@
           <ul class="list-group mb-3">
 
             <!-- Zokirjon -->
-              <%  if(shifokorArray[0].ishgaKelgan===true){ %>
+              <%  if(shifokorArray[3].ishgaKelgan){ %>
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">
                 <h6 class="my-0">Zokirjon</h6>
                   <small class="text-success">Ishga kelgan</small>
                 </div>
-                <span class="text-success"> <%= shifokorArray[0].koriklarSoni %> </span>
+                <span class="text-success"> <%= shifokorArray[3].koriklarSoni %> </span>
               </li>
                 <%   } else {  %>
                   <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -71,18 +71,18 @@
                       <h6 class="my-0">Zokirjon</h6>
                           <small class="text-muted">Ishga kelmagan</small>
                       </div>
-                        <span class="text-muted"> <%= shifokorArray[0].koriklarSoni %> </span>
+                        <span class="text-muted"> <%= shifokorArray[3].koriklarSoni %> </span>
                     </li>
                 <%  } %>
 
                 <!-- Ma Ming -->
-                <%  if(shifokorArray[1].ishgaKelgan){ %>
+                <%  if(shifokorArray[0].ishgaKelgan){ %>
               <li class="list-group-item d-flex justify-content-between bg-light">
                 <div class="text-success">
                   <h6 class="my-0">Ma Ming</h6>
                     <small class="text-success">Ishga kelgan</small>
                   </div>
-                  <span class="text-success"> <%= shifokorArray[1].koriklarSoni %> </span>
+                  <span class="text-success"> <%= shifokorArray[0].koriklarSoni %> </span>
                 </li>
                   <%   } else {  %>
                     <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -90,18 +90,18 @@
                         <h6 class="my-0">Ma Ming</h6>
                             <small class="text-muted">Ishga kelmagan</small>
                         </div>
-                          <span class="text-muted"> <%= shifokorArray[1].koriklarSoni %> </span>
+                          <span class="text-muted"> <%= shifokorArray[0].koriklarSoni %> </span>
                       </li>
                   <%  } %>
 
               <!-- Akbarali -->
-                  <%  if(shifokorArray[2].ishgaKelgan){ %>
+                  <%  if(shifokorArray[1].ishgaKelgan){ %>
                 <li class="list-group-item d-flex justify-content-between bg-light">
                   <div class="text-success">
                     <h6 class="my-0">Akbarali</h6>
                       <small class="text-success">Ishga kelgan</small>
                     </div>
-                    <span class="text-success"> <%= shifokorArray[2].koriklarSoni %> </span>
+                    <span class="text-success"> <%= shifokorArray[1].koriklarSoni %> </span>
                   </li>
                     <%   } else {  %>
                       <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -109,17 +109,17 @@
                           <h6 class="my-0">Akbarali</h6>
                               <small class="text-muted">Ishga kelmagan</small>
                           </div>
-                            <span class="text-muted"> <%= shifokorArray[2].koriklarSoni %> </span>
+                            <span class="text-muted"> <%= shifokorArray[1].koriklarSoni %> </span>
                         </li>
                     <%  } %>
 
-                    <%  if(shifokorArray[3].ishgaKelgan){ %>
+                    <%  if(shifokorArray[2].ishgaKelgan){ %>
                   <li class="list-group-item d-flex justify-content-between bg-light">
                     <div class="text-success">
                       <h6 class="my-0">Ahrorjon</h6>
                         <small class="text-success">Ishga kelgan</small>
                       </div>
-                      <span class="text-success"> <%= shifokorArray[3].koriklarSoni %> </span>
+                      <span class="text-success"> <%= shifokorArray[2].koriklarSoni %> </span>
                     </li>
                       <%   } else {  %>
                         <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -127,7 +127,7 @@
                             <h6 class="my-0">Ahrorjon</h6>
                                 <small class="text-muted">Ishga kelmagan</small>
                             </div>
-                              <span class="text-muted"> <%= shifokorArray[3].koriklarSoni %> </span>
+                              <span class="text-muted"> <%= shifokorArray[2].koriklarSoni %> </span>
                           </li>
                       <%  } %>
 
