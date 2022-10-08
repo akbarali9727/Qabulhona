@@ -11,7 +11,8 @@ const doctorSchema = new mongoose.Schema({
   ismi: String,
   ishgaKelgan: Boolean,
   koriklarSoni: Number,
-  honaRaqami: Number
+  honaRaqami: Number,
+  korilganKasallar: Number
 });
 
 
@@ -19,14 +20,25 @@ const Doctor=mongoose.model("Doctor",doctorSchema);
   let today = new Date().toISOString().split('T')[0];
 
 
-cron.schedule('0 0 * * *',()=>{
-  Doctor.updateMany({},{koriklarSoni: 0,ishgaKelgan: false },function(err,callback){
+// cron.schedule('0 0 * * *',()=>{
+//   Doctor.updateMany({},{koriklarSoni: 0,ishgaKelgan: false },function(err,callback){
+//     if(!err){
+//     }
+//   });
+// });
+
+exports.kunniYakunlash = function(){
+  Doctor.updateMany({},{koriklarSoni: 0,ishgaKelgan: false,korilganKasallar:0 },function(err,callback){
     if(!err){
     }
   });
+}
+
+exports.kasalKorildi = function(shifokori){
+  console.log(shifokori);
+Doctor.findOneAndUpdate({ismi: shifokori},{$inc:{korilganKasallar: +1}},function(err,callback){
 });
-
-
+}
 
 exports.getShifokorlar = function(){
 return Doctor;

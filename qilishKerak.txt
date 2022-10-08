@@ -1,4 +1,3 @@
-Editni yasash
-Shifokorlarga mahsulotlarni qoshish
-Shifokorda nechta korilmagan bemor borligini korsatib turish
-Izlash tugmasini ishlatish
+Editni yasash - edit uchun alohida window yoki card qilaman
+Shifokorlarga mahsulotlarni qoshish - mahsulot uchun alohida window yoki card yoki osha pageni ozida dropdown menu qilaman
+Izlash tugmasini ishlatish - bir nechta textfieldlar qoshiladi har bir parametr uchun(shifokori,kelgan sana,telefon raqami, ismi sharifi)

@@ -11,9 +11,49 @@ app.use((req, res, next) => {
   next()
 })
 
+// homepage va login pagelar
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/firstPage.html");
-});
+}); //homepageni ochadi
+app.post("/", function(req, res) {
+  const name = "/login/" + req.body.vrachButton;
+  res.redirect(name);
+}); //homepagedagi vrachlardan biri tanlanganda vrach uchun login pageka junatadi
+
+app.get("/login/:topic", function(req, res) {
+  const name = req.params.topic;
+  if (req.isAuthenticated()) {
+    res.redirect("/shifokorlar/" + name);
+  } else {
+    res.render("login", {
+      email: name.replace(/\s/g, '') + "@gmail.com",
+      img: name.replace(' ', '') + ".png",
+      siteName: "shifokorlar/" + name
+    });
+  }
+}); //agar user auth bolmasa login page ochadi, auth bolsa shifokorlar pagega junatadi
+
+app.post("/login", passport.authenticate("local", {
+  failureRedirect: "back",
+  failureMessage: true
+}), function(req, res) {
+  res.redirect(req.body.siteName);
+}); // login pagedagi kirish tugmasi bosilganda userni auth qiladi
+
+app.post("/register", function(req, res) {
+  User.register({
+    username: req.body.username
+  }, req.body.password, function(err, user) {
+    if (err) {
+      console.log(err);
+      res.redirect("/");
+    } else {
+      passport.authenticate("local")(req, res, function() {
+        res.redirect("/");
+      })
+    }
+  })
+}); //hozirda ishlamaydi, yangi ishchini registr qilish uchun login.ejsda form post yonalishini shunga ozgartirish lozim
 
 
 
@@ -44,27 +84,7 @@ app.get("/qabulhona", function(req, res) {
       siteName: "/qabulhona"
     });
   }
-
-});
-
-
-app.post("/register", function(req, res) {
-  User.register({
-    username: req.body.username
-  }, req.body.password, function(err, user) {
-    if (err) {
-      console.log(err);
-      res.redirect("/");
-    } else {
-      passport.authenticate("local")(req, res, function() {
-        res.redirect("/");
-      })
-    }
-  })
-});
-
-
-
+}); //qabulhona pageni yuklaydi(auth bosa)
 app.post("/qabulhona", function(req, res) {
   let tolovTuri = req.body.paymentMethod;
   let naqd = false;
@@ -105,7 +125,19 @@ app.post("/qabulhona", function(req, res) {
       console.log("Kasalni databasega saqlab bolmadi");
     }
   });
-});
+}); //qabulhonadagi zangor tugma bosganda ishlaydi, kasalni db ga saqlaydi
+app.get("/qabulhona/yakunlash", function(req, res) {
+
+  req.logout(function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      shifokorlar.kunniYakunlash();
+      res.redirect("/");
+    }
+  })
+}); //qabuldagi qizil tugmaga ishlaydi, ish kunini yakunlaydi(shifokor korik soni va ishga kelganini 0 qiladi, sign out qiladi)
+
 
 
 
@@ -115,7 +147,7 @@ app.get("/bemorlar", function(req, res) {
   if (req.user !== undefined) {
     mail = req.user.username;
   }
-  if (req.isAuthenticated() && mail === "qabulhona@gmail.com"){
+  if (req.isAuthenticated() && mail === "qabulhona@gmail.com") {
     let today = new Date().toISOString().split('T')[0];
     Kasal.find({
       kelganSana: today
@@ -136,8 +168,7 @@ app.get("/bemorlar", function(req, res) {
       siteName: "/bemorlar"
     });
   }
-
-});
+}); //faqat bugungi bemorlarni yuklaydi
 
 app.get("/bemorlarJami", function(req, res) {
   Kasal.find(function(err, topilganKasallar) {
@@ -150,15 +181,15 @@ app.get("/bemorlarJami", function(req, res) {
   }).sort({
     kelganSana: 'desc'
   });
-});
+}); //jami bemorlarni yuklaydi
 
-app.post("/vaqti",function(req,res){
-  if(req.body.vaqti==="Bugungi"){
+app.post("/vaqti", function(req, res) {
+  if (req.body.vaqti === "Bugungi") {
     res.redirect("/bemorlar");
   } else {
     res.redirect("/bemorlarJami");
   }
-})
+}); // bemorlar pagedagi ortadagi tugma bosganda ishlaydi bugungi->jami->bugungi rejimida
 
 app.post("/bemorlar", function(req, res) {
   const id = req.body.myId;
@@ -170,15 +201,13 @@ app.post("/bemorlar", function(req, res) {
       }
     })
   }
-})
+}); //row dagi delete tugmasini bosganda ishlaydi, hozircha pravit ishlagani yoq
 
 
 //Vrachlar
 app.get("/shifokorlar/:topic", function(req, res) {
   const shifName = req.user.username.split('@')[0];
   if (req.isAuthenticated() && shifName === _.lowerCase(req.params.topic).replace(' ', '')) {
-
-    let today = new Date().toISOString().split('T')[0];
     let topic = _.lowerCase(req.params.topic);
     let n = 0;
     vrachNames.forEach(vrachName => {
@@ -196,7 +225,7 @@ app.get("/shifokorlar/:topic", function(req, res) {
           } else {
             res.render("vrachlar", {
               kasalData: kasallar,
-              vrachNum: n
+              shifokori: vrachName
             })
           }
         })
@@ -208,39 +237,12 @@ app.get("/shifokorlar/:topic", function(req, res) {
   }
 
 
-});
-
-app.post("/", function(req, res) {
-  const name = "/login/" + req.body.vrachButton;
-  res.redirect(name);
-});
-
-app.get("/login/:topic", function(req, res) {
-  const name = req.params.topic;
-  if (req.isAuthenticated()) {
-    res.redirect("/shifokorlar/" + name);
-  } else {
-    res.render("login", {
-      email: name.replace(/\s/g, '') + "@gmail.com",
-      img: name.replace(' ', '') + ".png",
-      siteName: "shifokorlar/" + name
-    });
-  }
-});
-
-
-app.post("/login", passport.authenticate("local", {
-  failureRedirect: "back",
-  failureMessage: true
-}), function(req, res) {
-  res.redirect(req.body.siteName);
-});
-
-
+}); // agar user auth bolsa shifokor pageni ochadi, bolmasa homepagega junatadi
 
 app.post("/shifokorlar", function(req, res) {
   let id = req.body.malumotniSaqlash;
   let diagnoz = req.body.bemorIzohi;
+  const shifokori = req.body.shifokori;
   diagnoz += " " + new Date().toDateString();
   Kasal.updateOne({
     _id: id
@@ -249,12 +251,12 @@ app.post("/shifokorlar", function(req, res) {
     korildi: true
   }, function(err, callback) {
     if (!err && callback) {
+      shifokorlar.kasalKorildi(shifokori);
       res.redirect("back");
     }
   });
-});
+}); // korildi tugmasa bosilganda bemorni diagnoz bolimiga malumot qoshib uni korildi true qiladi
 
-// Shifokor Yakunlash tugmasini bosganda uni ishga kelmagan holatga o`tkizadi. Koriklar sonini nol qilmaydi!
 app.post("/vrachYakunlash", function(req, res) {
   const docName = req.body.button;
   shifokorlar.shifokorKetdi(docName);
@@ -264,7 +266,8 @@ app.post("/vrachYakunlash", function(req, res) {
     }
   })
   res.redirect("/");
-});
+});// Shifokor Yakunlash tugmasini bosganda uni ishga kelmagan holatga o`tkizadi. Koriklar sonini nol qilmaydi!
+
 
 
 
